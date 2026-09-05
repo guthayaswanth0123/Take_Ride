@@ -1,6 +1,4 @@
-# Environment files (EXCLUDED FROM GIT)
-.env
-.env.*
+# Environment example files (EXCLUDED FROM GIT)
 .env.example
 
 # Dependency & Build Output
