@@ -1,10 +1,5 @@
 # Single Root .gitignore for Take_Ride Monorepo
 
-# Private environment files
-.env
-.env.*
-!.env.example
-
 # Dependency directories
 node_modules/
 
