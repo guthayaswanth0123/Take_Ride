@@ -1,5 +1,7 @@
-# Environment example files (EXCLUDED FROM GIT)
-.env.example
+# Private environment files
+.env
+.env.*
+!.env.example
 
 # Dependency & Build Output
 node_modules/
