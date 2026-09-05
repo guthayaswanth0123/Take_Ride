@@ -13,7 +13,7 @@ export const checkAuth =
     try {
       let accessToken = req.headers.authorization || req.cookies.accessToken;
       if (!accessToken) {
-        throw new AppError(403, "No token received");
+        throw new AppError(httpStatus.UNAUTHORIZED, "No token received");
       }
 
 

@@ -16,7 +16,11 @@ export const globalErrorHandler = (
   next: NextFunction
 ) => {
   if (envVars.NODE_ENV === "development") {
-    console.log(err);
+    if (err instanceof AppError && err.statusCode < 500) {
+      console.log(`[Client Error ${err.statusCode}]: ${err.message}`);
+    } else {
+      console.log(err);
+    }
   }
   let errorSources: TErrorSources[] = [];
   let statusCode = 500;

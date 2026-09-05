@@ -1,10 +1,14 @@
+# Single Root .gitignore for Take_Ride Monorepo
+
 # Private environment files
 .env
 .env.*
 !.env.example
 
-# Dependency & Build Output
+# Dependency directories
 node_modules/
+
+# Build & Dist outputs
 dist/
 dist-ssr/
 build/
@@ -15,9 +19,17 @@ build/
 Thumbs.db
 .vscode/
 .idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Logs
+# Logs & Debugging
 *.log
+logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
