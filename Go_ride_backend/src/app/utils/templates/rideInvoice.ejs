@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ride Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #007bff;
+            margin: 0;
+            font-size: 28px;
+        }
+        .header h2 {
+            color: #666;
+            margin: 5px 0 0 0;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        .invoice-details {
+            margin-bottom: 30px;
+        }
+        .invoice-details h3 {
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #555;
+        }
+        .detail-value {
+            color: #333;
+        }
+        .fare-total {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .fare-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Go-Ride</h1>
+            <h2>Ride Invoice</h2>
+        </div>
+
+        <p>Hello <%= riderName %>,</p>
+        <p>Thank you for using Go-Ride! Your payment has been processed successfully.</p>
+
+        <div class="invoice-details">
+            <h3>Invoice Details</h3>
+            <div class="detail-row">
+                <span class="detail-label">Invoice ID:</span>
+                <span class="detail-value"><%= transactionId %></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date:</span>
+                <span class="detail-value"><%= rideDate.toLocaleDateString() %></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Rider:</span>
+                <span class="detail-value"><%= riderName %></span>
+            </div>
+        </div>
+
+        <div class="invoice-details">
+            <h3>Ride Details</h3>
+            <div class="detail-row">
+                <span class="detail-label">From:</span>
+                <span class="detail-value"><%= pickupLocation %></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">To:</span>
+                <span class="detail-value"><%= destinationLocation %></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Payment Method:</span>
+                <span class="detail-value">Card</span>
+            </div>
+        </div>
+
+        <div class="fare-total">
+            <div>Total Fare</div>
+            <div class="fare-amount">৳<%= fare %></div>
+        </div>
+
+        <p>Your invoice PDF is attached to this email for your records.</p>
+
+        <div class="footer">
+            <p>&copy; Go-Ride. All rights reserved.</p>
+            <p>For support, contact us at support@go-ride.com</p>
+        </div>
+    </div>
+</body>
+</html>

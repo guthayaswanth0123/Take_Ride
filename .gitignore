@@ -1,0 +1,23 @@
+# Environment files (EXCLUDED FROM GIT)
+.env
+.env.*
+.env.example
+
+# Dependency & Build Output
+node_modules/
+dist/
+dist-ssr/
+build/
+.vercel/
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
