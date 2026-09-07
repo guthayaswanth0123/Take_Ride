@@ -4,6 +4,8 @@ import { Star, Shield, Car, MapPin, Navigation } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import LocationInput from "@/pages/rider/LocationInput";
+import RideMap from "@/pages/rider/RideMap";
+import ServiceUnavailableModal from "./ServiceUnavailableModal";
 
 interface LocationData {
   id: number;
@@ -44,6 +46,9 @@ const HeroSection: React.FC = () => {
   const estTime = Math.round(distance * 1.4);
   const price = Math.round(50 + distance * 15);
 
+  const [showUnavailableModal, setShowUnavailableModal] = useState(false);
+  const [unavailableLocationName, setUnavailableLocationName] = useState("");
+
   const handlePickupSelect = (loc: LocationData) => {
     setPickupLocation(loc);
     setPickupInput(loc.name);
@@ -78,15 +83,15 @@ const HeroSection: React.FC = () => {
       <div className="container mx-auto px-4 pt-16 relative z-10 mb-10">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8">
           {/* Left Content */}
-          <div className="w-1/2">
-            <h1 className="text-4xl lg:text-6xl font-primary text-white mb-4 leading-tight font-bold mt-8">
+          <div className="w-full lg:w-1/2">
+            <h1 className="text-4xl lg:text-6xl font-primary text-white mb-4 leading-tight font-bold mt-4 lg:mt-8">
               Arrive in Comfort,<br />Depart with Confidence
             </h1>
-            <p className="text-lg text-gray-300 mb-10 max-w-lg leading-relaxed">
-              GoRide connects you with verified professional drivers across Dhaka.
+            <p className="text-lg text-gray-300 mb-8 max-w-lg leading-relaxed">
+              GoRide connects you with verified professional drivers across India.
               Safe, affordable, and always on time — wherever you need to go.
             </p>
-            <div className="flex flex-wrap gap-6 mt-10 mb-10">
+            <div className="flex flex-wrap gap-6 mt-8 mb-8">
               <div className="flex items-center gap-2">
                 <div className="bg-white/20 p-2 rounded-full">
                   <Shield className="h-5 w-5 text-white" />
@@ -107,13 +112,13 @@ const HeroSection: React.FC = () => {
               </div>
             </div>
             <Link to="/login">
-              <Button className="px-8 py-6 text-lg font-semibold">Book A Ride</Button>
+              <Button className="px-8 py-6 text-lg font-semibold cursor-pointer">Book A Ride</Button>
             </Link>
           </div>
 
           {/* Right Content — Booking Form */}
-          <div className="w-1/2 flex justify-center">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl p-8 w-full max-w-md">
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl p-6 md:p-8 w-full max-w-md">
               <h2 className="text-2xl font-bold text-white mb-6">Book a Ride</h2>
               <div className="space-y-4 [&_label]:text-white [&_input]:text-white [&_input]:placeholder:text-gray-300 [&_input]:bg-white/10 [&_input]:border-white/30">
                 <LocationInput
@@ -135,7 +140,7 @@ const HeroSection: React.FC = () => {
                   inputRef={destinationRef}
                 />
                 <Button
-                  className="w-full h-12 text-base font-semibold"
+                  className="w-full h-12 text-base font-semibold cursor-pointer"
                   onClick={handleFindRide}
                   disabled={!pickupLocation || !destinationLocation}
                 >
@@ -148,21 +153,25 @@ const HeroSection: React.FC = () => {
                 <div className="mt-5 border-t dark:border-slate-700 pt-5 space-y-3 text-sm">
                   <p className="font-semibold text-white text-base">Trip Summary</p>
 
+                  <div className="rounded-xl overflow-hidden border border-white/20 h-40">
+                    <RideMap pickup={pickupLocation} drop={destinationLocation} />
+                  </div>
+
                   <div className="flex gap-2">
-                    <Navigation className="h-4 w-4 text-blue-500 mt-0.5 shrink-0" />
+                    <Navigation className="h-4 w-4 text-blue-400 mt-0.5 shrink-0" />
                     <div>
                       <p className="text-gray-400 text-xs">Pickup</p>
                       <p className="font-medium text-white">{pickupLocation.name}</p>
-                      <p className="text-xs text-gray-300">{pickupLocation.address}</p>
+                      <p className="text-xs text-gray-300 line-clamp-1">{pickupLocation.address}</p>
                     </div>
                   </div>
 
                   <div className="flex gap-2">
-                    <MapPin className="h-4 w-4 text-red-500 mt-0.5 shrink-0" />
+                    <MapPin className="h-4 w-4 text-red-400 mt-0.5 shrink-0" />
                     <div>
                       <p className="text-gray-400 text-xs">Destination</p>
                       <p className="font-medium text-white">{destinationLocation.name}</p>
-                      <p className="text-xs text-gray-300">{destinationLocation.address}</p>
+                      <p className="text-xs text-gray-300 line-clamp-1">{destinationLocation.address}</p>
                     </div>
                   </div>
 
@@ -177,11 +186,11 @@ const HeroSection: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-gray-400 text-xs">Price</p>
-                      <p className="font-semibold text-primary text-base">৳{price}</p>
+                      <p className="font-semibold text-emerald-400 text-base">₹{price}</p>
                     </div>
                   </div>
 
-                  <Button className="w-full h-11 font-semibold" onClick={handleBook}>
+                  <Button className="w-full h-11 font-semibold cursor-pointer" onClick={handleBook}>
                     {isLoggedIn ? "Book Now" : "Login to Book"}
                   </Button>
                 </div>
@@ -190,6 +199,11 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
       </div>
+      <ServiceUnavailableModal
+        isOpen={showUnavailableModal}
+        onClose={() => setShowUnavailableModal(false)}
+        locationName={unavailableLocationName}
+      />
     </div>
   );
 };

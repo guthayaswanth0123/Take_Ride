@@ -29,13 +29,13 @@ import toast from "react-hot-toast";
 import { useAppDispatch } from "@/redux/hook";
 
 const navigationLinks = [
+  { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/features", label: "Features" },
   { href: "/driver-partnership", label: "Driver" },
   { href: "/business", label: "Business" },
-    { href: "/about", label: "About" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-
 ];
 
 export default function Navbar() {

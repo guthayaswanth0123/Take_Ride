@@ -1,0 +1,42 @@
+server:
+  port: 5000
+
+spring:
+  application:
+    name: go-ride-backend
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/go_ride
+    redis:
+      host: 127.0.0.1
+      port: 6379
+  jackson:
+    default-property-inclusion: ALWAYS
+    serialization:
+      write-dates-as-timestamps: false
+
+jwt:
+  access-secret: local_dev_access_secret_key_12345
+  access-expiration-ms: 86400000
+  refresh-secret: local_dev_refresh_secret_key_12345
+  refresh-expiration-ms: 2592000000
+
+admin:
+  email: admin@goride.com
+  password: admin@123
+
+sslcommerz:
+  store-id: testbox
+  store-pass: gw_testbox
+  payment-api: https://sandbox.sslcommerz.com/gwprocess/v4/api.php
+  validation-api: https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php
+  success-frontend-url: http://localhost:5173/payment/success
+  fail-frontend-url: http://localhost:5173/payment/fail
+  cancel-frontend-url: http://localhost:5173/payment/cancel
+  success-backend-url: http://localhost:5000/api/payment/success
+  fail-backend-url: http://localhost:5000/api/payment/fail
+  cancel-backend-url: http://localhost:5000/api/payment/cancel
+
+socketio:
+  host: localhost
+  port: 5001

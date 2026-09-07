@@ -3,7 +3,7 @@ import { io, Socket } from 'socket.io-client';
 class SocketService {
   private socket: Socket | null = null;
 
-  connect(serverUrl: string = 'http://localhost:5000') {
+  connect(serverUrl: string = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5001') {
     if (!this.socket) {
       this.socket = io(serverUrl, {
         withCredentials: true,

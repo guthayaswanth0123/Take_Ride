@@ -9,31 +9,31 @@ const CitiesCovered = () => {
   const [selectedCountry, setSelectedCountry] = useState('All');
 
   const citiesData = {
-    bangladesh: {
-      name: "Bangladesh",
+    india: {
+      name: "India",
       cities: [
-        { name: "Dhaka", drivers: 12500, rides: 450000, popular: true },
-        { name: "Chittagong", drivers: 4200, rides: 180000, popular: true },
-        { name: "Sylhet", drivers: 2800, rides: 95000, popular: false },
-        { name: "Khulna", drivers: 1900, rides: 75000, popular: false },
-        { name: "Rajshahi", drivers: 1600, rides: 62000, popular: false },
-        { name: "Barisal", drivers: 1200, rides: 48000, popular: false }
+        { name: "Delhi NCR", drivers: 18500, rides: 650000, popular: true },
+        { name: "Mumbai", drivers: 16200, rides: 580000, popular: true },
+        { name: "Bengaluru", drivers: 14800, rides: 520000, popular: true },
+        { name: "Hyderabad", drivers: 9900, rides: 350000, popular: true },
+        { name: "Kolkata", drivers: 8500, rides: 320000, popular: true },
+        { name: "Chennai", drivers: 7600, rides: 280000, popular: false },
+        { name: "Pune", drivers: 6200, rides: 210000, popular: false },
       ]
     },
     international: {
       name: "International",
       cities: [
-        { name: "Kolkata", drivers: 8500, rides: 320000, popular: true },
         { name: "Dubai", drivers: 6200, rides: 280000, popular: true },
         { name: "Singapore", drivers: 5800, rides: 260000, popular: true },
-        { name: "Kuala Lumpur", drivers: 4200, rides: 190000, popular: false },
-        { name: "Bangkok", drivers: 3800, rides: 170000, popular: false }
+        { name: "Kuala Lumpur", drivers: 4200, rides: 190000, false },
+        { name: "Bangkok", drivers: 3800, rides: 170000, false }
       ]
     }
   };
 
   const allCities = [
-    ...citiesData.bangladesh.cities.map(city => ({ ...city, country: 'bangladesh' })),
+    ...citiesData.india.cities.map(city => ({ ...city, country: 'india' })),
     ...citiesData.international.cities.map(city => ({ ...city, country: 'international' }))
   ];
 
@@ -46,15 +46,15 @@ const CitiesCovered = () => {
   const popularCities = allCities.filter(city => city.popular);
 
   return (
-    <section id="cities" className="py-20 bg-gray-50">
+    <section id="cities" className="py-20 bg-gray-50 dark:bg-slate-950">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Cities We Serve
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            GoRide is available in major cities across Bangladesh and expanding internationally
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            GoRide is available in major cities across India and expanding internationally
           </p>
         </div>
 
@@ -80,7 +80,7 @@ const CitiesCovered = () => {
               className="px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
             >
               <option value="All">All Countries</option>
-              <option value="bangladesh">Bangladesh</option>
+              <option value="india">India</option>
               <option value="international">International</option>
             </select>
           </div>

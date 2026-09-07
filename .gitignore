@@ -20,11 +20,13 @@ Thumbs.db
 *.sln
 *.sw?
 
-# Logs & Debugging
-*.log
-logs/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Environment & secrets
+.env
+.env.local
+*.env
+
+# Java Maven Build outputs
+target/
+*.class
+*.jar
+*.war
